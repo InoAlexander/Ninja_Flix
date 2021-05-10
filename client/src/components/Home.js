@@ -4,7 +4,7 @@ import {useState, Link} from 'react';
 const HomePage = () => {
 
 return(
-    console.log()
+    console.log("hello")
 )
 };
 

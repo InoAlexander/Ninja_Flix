@@ -1,10 +1,18 @@
 import React from 'react';
-import {useState, Link} from 'react';
+import "./Home.css";
+import Navbar from "./Navbar";
+import Banner from "./Banner"
+
 
 const HomePage = () => {
 
 return(
-    console.log("hello")
+    <div className="homePage">
+    <Navbar />
+    <Banner /> 
+
+
+    </div>
 )
 };
 

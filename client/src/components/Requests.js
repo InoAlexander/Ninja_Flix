@@ -2,7 +2,7 @@ const API_KEY = "ad389961c428e7a40c6a18b53aa7ecee"
 
 //concatenates api key inside of the url 
 const requests = {
-    fetchTrending : `/trending/all/week?api_key=${API_KEY}&language=en-US`,
+    fetchTrending: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
     fetchNinjaFlixOriginals: `/discover/tv?api_key=${API_KEY}&with_networks=213`,
     fetchTopRated: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
     fetchAction: `/discover/movie?api_key=${API_KEY}&with_genres=28`,

@@ -4,16 +4,18 @@ import "./Navbar.css";
 
 function Navbar() {
     const [show, handleShow] = useState(false);
+
     const navbarTransition = () =>{
-        if(window.scrollY > 100){
-            handleShow = true;
-        } else{
-            handleShow = false;
+        if (window.scrollY > 100){
+            handleShow(true);
+        } else {
+            handleShow(false);
         }
     }
+
     useEffect(() => {
         window.addEventListener("scroll", navbarTransition)
-        return () => window.addEventListener('scroll', navbarTransition)
+        return () => window.addEventListener("scroll", navbarTransition)
     }, [])
 
     return (

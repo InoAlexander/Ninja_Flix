@@ -16,13 +16,13 @@ return(
     <Rows title="NinjaFlix Originals" fetchURL={requests.fetchNinjaFlixOriginals} isLargeRow/>
 
     <Rows title="Trending" fetchURL={requests.fetchTrending} />
-    <Rows title="Top Rated" fetchURL={requests.fetchToprated} />
-    <Rows title="Action" fetchURL={requests.fetchActionMovies} />
-    <Rows title="Horror" fetchURL={requests.fetchHorrorMovies} />
-    <Rows title="Comedy" fetchURL={requests.fetchComedyMovies} />
-    <Rows title="Romance" fetchURL={requests.fetchRomanceMovies} />
-    <Rows title="Mystery" fetchURL={requests.fetchMysteryMovies} />
-    <Rows title="Western" fetchURL={requests.fetchWesternMovies} />
+    <Rows title="Top Rated" fetchURL={requests.fetchTopRated} />
+    <Rows title="Action" fetchURL={requests.fetchAction} />
+    <Rows title="Horror" fetchURL={requests.fetchHorror} />
+    <Rows title="Comedy" fetchURL={requests.fetchComedy} />
+    <Rows title="Romance" fetchURL={requests.fetchRomance} />
+    <Rows title="Mystery" fetchURL={requests.fetchMystery} />
+    <Rows title="Western" fetchURL={requests.fetchWestern} />
     <Rows title="Documentaries" fetchURL={requests.fetchDocumentaries} />
     </div>
 );

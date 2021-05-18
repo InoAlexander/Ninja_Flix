@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from "./axios";
 import "./Rows.css";
-import requests from "./Requests";
+import YouTube from 'react-youtube';
+import movieTrailer from 'movie-trailer';
 
 function Rows({ title, fetchURL, isLargeRow = false }) {
     const [movies, setMovies] = useState([]); 
-
+    const [trailer, setTrailer] = useState(""); 
     const base_url = "https://image.tmdb.org/t/p/original/";
 
     useEffect(() => {
@@ -20,9 +21,32 @@ function Rows({ title, fetchURL, isLargeRow = false }) {
 
     console.log(movies);
 
+    const opts = {
+        height: '390',
+        width: '100%',
+        playerVars: {
+          // https://developers.google.com/youtube/player_parameters
+        autoplay: 1,
+        }
+    }
+
+    // handler for playing the trailers
+    const clickHandler = (movie) => {
+        if(trailer){
+            setTrailer('');
+        } else {
+            movieTrailer(movie?.name || "")
+            .then((url) =>{
+                const urlParameters = new URLSearchParams (new URL(url).search) 
+                setTrailer(urlParameters.get('v'));
+            }).catch(error => console.log("error in clickHandler function", error))
+        }
+    }
+
     return(
         <div className="row">
             <h2>{title}</h2>
+            <h4 className="rowTitle">{movies?.title || movies?.name || movies?.original_name}</h4>
             <div className="posters"> 
             {movies.map(
                 (movie) => 
@@ -30,6 +54,8 @@ function Rows({ title, fetchURL, isLargeRow = false }) {
                 <img 
                 className={`poster ${isLargeRow && "posterLarge"}`} 
                 key={movie.id }
+                // click handler
+                onClick={() => clickHandler(movie)}
                 src={`${base_url}${
                     isLargeRow ? movie.poster_path : movie.backdrop_path
                 }`} 
@@ -38,6 +64,7 @@ function Rows({ title, fetchURL, isLargeRow = false }) {
                 ) 
             )}
             </div>
+            {trailer && <YouTube videoId={trailer} opts={opts} />}
         </div>
     );
 }

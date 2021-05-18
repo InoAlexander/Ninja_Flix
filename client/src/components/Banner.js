@@ -3,10 +3,14 @@ import {useState, useEffect} from 'react';
 import axios from "./axios"
 import "./Banner.css"
 import requests from "./Requests";
+import YouTube from 'react-youtube';
+import movieTrailer from 'movie-trailer';
+
 
 function Banner() {
 
     const [movie, setMovie] = useState([]);
+    const [trailerUrl, setTrailerUrl] = useState("");
 
     // fetching movie api info
     useEffect(() => {
@@ -22,7 +26,14 @@ function Banner() {
         }
         fetchData();
     }, [])
-
+    const videoPlayer = {
+        height: '390',
+        width: '100%',
+        playerVars: {
+          // https://developers.google.com/youtube/player_parameters
+        autoplay: 1,
+        }
+    }
     console.log(movie);
 
     // function to truncate text if its too long (will add ...) 
@@ -30,7 +41,17 @@ function Banner() {
         //  n = number of characters
         return string?.length > n ? string.substr(0, n - 1 ) + '...' : string;
     }
-
+    const playButton = (movie) => {
+        if(trailerUrl){
+            setTrailerUrl('');
+        } else {
+            movieTrailer(movie?.name || "")
+            .then((url) =>{
+                const urlParameters = new URLSearchParams (new URL(url).search) 
+                setTrailerUrl(urlParameters.get('v'));
+            }).catch(error => console.log("error in clickHandler function", error))
+        }
+    }
 
 
     return (
@@ -45,7 +66,7 @@ function Banner() {
             <h1 className="bannerTitle">{movie?.title || movie?.name || movie?.original_name}</h1>
                 
             <div className="bannerButtons">
-                <button className="bannerButton" >Play</button>
+                <button onClick={() => playButton(movie)} className="bannerButton" >Play</button>
                 <button className="bannerButton" >My Ninja List</button>
             </div>
 
@@ -54,10 +75,9 @@ function Banner() {
 
             </h1>
 
-            {/* adds a cool fade to the bottom */}
-            <div className="banner--fadeBottom" />
+            {trailerUrl && <YouTube videoId={trailerUrl} opts={videoPlayer} />}
         </div>
-
+            
         </header>
     )
 }

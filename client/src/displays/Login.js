@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import "./Login.css"
+import Register from './Register';
 
 function Login() {
     const [login, setLogin] = useState(false);
@@ -14,11 +15,12 @@ function Login() {
 
                 <div className="body">
                     {login ? (
-                        <LoginScreen />
+                        <Register />
                     ): (
+                        <>
                         <h1>A "SLICE" of your favorite movies!</h1>
                     <h3>CANCEL AND DIE BY THE BLADE!</h3>
-                    <h4> Register or die by the shinobi! (you really dont have a choice!)  </h4>
+                    <h4> Register or battle the shinobi! (you really dont have a choice!)  </h4>
 
                     <div className="input">
                         <form>
@@ -26,11 +28,11 @@ function Login() {
                             <button onClick={ () => setLogin(true)} className="join ">Join Our Clan</button>
                         </form>
                     </div>
-                </div>
-                
+                </>
                     )}
 
             </div>
+        </div>
         </div>
     )
 }

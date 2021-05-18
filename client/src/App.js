@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
-import Home from "./displays/Home"
+import Home from "./displays/Home";
+import Login from "./displays/Login";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+const user = null;
 
 function App() {
   return (
@@ -14,7 +16,7 @@ function App() {
       <Router>
         {!user ? (
           <Login />
-        ); 
+        ) : (
         <Switch>
           {/* <Route path="/test">
             <h1> Test route </h1> 
@@ -23,7 +25,7 @@ function App() {
             <Home />
           </Route>
         </Switch>
-        }
+        )}
     </Router>
 
     </div>
